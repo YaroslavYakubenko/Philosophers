@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaroslav <yaroslav@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/13 19:50:26 by yaroslav         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:36:50 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ typedef struct s_philo
 	pthread_t		thread; // поток философа
 	pthread_mutex_t	*left_fork; // указатель на левую вилку
 	pthread_mutex_t	*right_fork; // указатель на правую вилку
-} t_philo;
+}	t_philo;
 
 typedef struct s_table
 {
 	int				num_philo; // количество философов
 	t_philo			*philo; // масив философов
 	pthread_mutex_t	*forks; // масив вилок
-} t_table;
+}	t_table;
 
-
+int		validate_arguments(int ac, char **av);
 
 
 #endif
