@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/14 21:53:51 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/14 23:05:58 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_simulation
 	int				time_to_eat; // время на еду
 	int				time_to_sleep; // время на сон
 	int				number_of_times_each_philosopher_must_eat;
+	int				*is_alive; // массив флагов жизни философов
 	long			start_time; // время начала симуляции
 	t_philo			*philos; // массив философов
 	pthread_mutex_t	*forks; // массив вилок
@@ -48,6 +49,6 @@ int		ft_atoi(const char *str);
 long	get_current_time(void);
 int		validate_arguments(int ac, char **av);
 int		init_simulation(t_simulation *sim, int ac, char **av);
-
+void	*philo_routine(void *arg);
 
 #endif

@@ -12,7 +12,7 @@ SRCS				= ${SRCS_DIR}main.c \
 					  ${SRCS_DIR}check_arguments.c \
 					  ${SRCS_DIR}utils.c \
 					  ${SRCS_DIR}init.c \
-					#   ${SRCS_DIR}philo.c \
+					  ${SRCS_DIR}philo.c \
 					#   ${SRCS_DIR}time.c \
 					#   ${SRCS_DIR}print.c \
 					#   ${SRCS_DIR}check.c

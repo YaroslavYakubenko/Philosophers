@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 21:14:15 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/14 21:51:45 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/14 23:09:18 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,19 @@ int	init_philosophers(t_simulation *sim)
 	return (1);
 }
 
+int	init_alive_status(t_simulation *sim)
+{
+	int	i;
+
+	i = 0;
+	while (i < sim->numbers_of_philosophers)
+	{
+		sim->is_alive[i] = 1;
+		i++;
+	}
+	return (1);
+}
+
 int	init_simulation(t_simulation *sim, int ac, char **av)
 {
 	sim->numbers_of_philosophers = ft_atoi(av[1]);
@@ -61,5 +74,7 @@ int	init_simulation(t_simulation *sim, int ac, char **av)
 	init_forks(sim);
 	init_philosophers(sim);
 	sim->start_time = get_current_time();
+	if (!init_alive_status(sim))
+		return (0);
 	return (1);
 }
