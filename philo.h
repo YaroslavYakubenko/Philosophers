@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/14 20:36:50 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/14 21:53:51 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,32 @@
 
 typedef struct s_philo
 {
-	int				id; // номер философа
-	pthread_t		thread; // поток философа
-	pthread_mutex_t	*left_fork; // указатель на левую вилку
-	pthread_mutex_t	*right_fork; // указатель на правую вилку
+	int					id; // номер философа
+	int					meals_eaten; // количество приемов пищи
+	long				last_meal_time; // время последнего приема пищи
+	pthread_mutex_t		*left_fork; // указатель на левую вилку
+	pthread_mutex_t		*right_fork; // указатель на правую вилку
+	pthread_mutex_t		print_mutex; // мьютекс для печати
+	struct s_simulation	*sim; // указатель на структуру симуляции
 }	t_philo;
 
-typedef struct s_table
+typedef struct s_simulation
 {
-	int				num_philo; // количество философов
-	t_philo			*philo; // масив философов
-	pthread_mutex_t	*forks; // масив вилок
-}	t_table;
+	int				numbers_of_philosophers; // количество философов
+	int				time_to_die; // время до смерти
+	int				time_to_eat; // время на еду
+	int				time_to_sleep; // время на сон
+	int				number_of_times_each_philosopher_must_eat;
+	long			start_time; // время начала симуляции
+	t_philo			*philos; // массив философов
+	pthread_mutex_t	*forks; // массив вилок
+	// pthread_mutex_t	*print_mutex; // мьютекс для печати
+}	t_simulation;
 
+int		ft_atoi(const char *str);
+long	get_current_time(void);
 int		validate_arguments(int ac, char **av);
+int		init_simulation(t_simulation *sim, int ac, char **av);
 
 
 #endif
