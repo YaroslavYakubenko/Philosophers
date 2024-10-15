@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/14 23:05:58 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:33:05 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ long	get_current_time(void);
 int		validate_arguments(int ac, char **av);
 int		init_simulation(t_simulation *sim, int ac, char **av);
 void	*philo_routine(void *arg);
+void	check_philo_status(t_simulation *sim);
 
 #endif

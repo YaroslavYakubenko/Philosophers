@@ -9,7 +9,7 @@ SUCCES				= @echo "$(GREEN)Philosophers compiled successfully$(COLOR)"
 
 
 SRCS				= ${SRCS_DIR}main.c \
-					  ${SRCS_DIR}check_arguments.c \
+					  ${SRCS_DIR}checks.c \
 					  ${SRCS_DIR}utils.c \
 					  ${SRCS_DIR}init.c \
 					  ${SRCS_DIR}philo.c \
