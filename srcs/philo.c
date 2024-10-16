@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:33:29 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/15 20:01:24 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/16 20:42:35 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,17 @@ void	eat(t_philo *philo)
 		- philo->sim->start_time, philo->id);
 	pthread_mutex_unlock(&philo->print_mutex);
 	philo->last_meal_time = get_current_time();
-	usleep(philo->sim->time_to_eat * 1000);
 	philo->meals_eaten++;
+	if (philo->meals_required != -1
+		&& philo->meals_eaten >= philo->meals_required)
+	{
+		pthread_mutex_lock(&philo->print_mutex);
+		printf("%ld %d is done eating\n", get_current_time()
+			- philo->sim->start_time, philo->id);
+		pthread_mutex_unlock(&philo->print_mutex);
+	}
+		// philo->sim->is_alive[philo->id - 1] = 0;
+	usleep(philo->sim->time_to_eat * 1000);
 }
 
 void	sleep_philo(t_philo *philo)

@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 22:22:26 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/15 19:46:29 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:25:15 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ int	main(int ac, char **av)
 {
 	t_simulation	sim;
 	pthread_t		*threads;
-	pthread_t		monitor_thread;
+	// pthread_t		monitor_thread;
 	int				i;
 
 	if (!validate_arguments(ac, av))
 		return (1);
+	// printf("here\n");
 	if (!init_simulation(&sim, ac, av))
 		return (1);
 	threads = malloc(sizeof(pthread_t) * sim.numbers_of_philosophers);
@@ -60,8 +61,10 @@ int	main(int ac, char **av)
 			(void *)&sim.philos[i]);
 		i++;
 	}
-	pthread_create(&threads[i], NULL, monitor_philos, (void *)&sim);
-	pthread_join(monitor_thread, NULL);
+	// pthread_create(&monitor_thread, NULL, monitor_philos, (void *)&sim);
+	// pthread_join(monitor_thread, NULL);
+	check_philo_status(&sim);
+	check_philo_meals(&sim);
 	i = 0;
 	while (i < sim.numbers_of_philosophers)
 	{

@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:28:32 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/15 19:32:36 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:27:55 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,14 @@ int	validate_arguments(int ac, char **av)
 void	check_philo_status(t_simulation *sim)
 {
 	int		i;
+	int		all_done;
 	long	current_time;
 
-	i = 0;
 	while (1)
 	{
+		all_done = 1;
 		current_time = get_current_time();
+		i = 0;
 		while (i < sim->numbers_of_philosophers)
 		{			
 			pthread_mutex_lock(&sim->philos[i].print_mutex);
@@ -72,8 +74,38 @@ void	check_philo_status(t_simulation *sim)
 				pthread_mutex_unlock(&sim->philos[i].print_mutex);
 				return ;
 			}
+			if (sim->philos[i].meals_eaten < sim->philos[i].meals_required)
+				all_done = 0;
 			pthread_mutex_unlock(&sim->philos[i].print_mutex);
 			i++;
+		}
+		usleep(1000);
+	}
+}
+
+void	check_philo_meals(t_simulation *sim)
+{
+	int	i;
+	int	all_fed;
+
+	while (1)
+	{
+		all_fed = 1;
+		i = 0;
+		while (i < sim->numbers_of_philosophers)
+		{
+			if (sim->philos[i].meals_required != -1
+				&& sim->philos[i].meals_eaten < sim->philos[i].meals_required)
+			{
+				all_fed = 0;
+				break ;
+			}
+			i++;
+		}
+		if (all_fed)
+		{
+			printf("All philosophers have eaten the required number of meals.\n");
+			break ;
 		}
 		usleep(1000);
 	}

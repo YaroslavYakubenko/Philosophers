@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/15 19:33:05 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:22:00 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_philo
 {
 	int					id; // номер философа
 	int					meals_eaten; // количество приемов пищи
+	int					meals_required; // cчётчик приёмов пищи
 	long				last_meal_time; // время последнего приема пищи
 	pthread_mutex_t		*left_fork; // указатель на левую вилку
 	pthread_mutex_t		*right_fork; // указатель на правую вилку
@@ -51,5 +52,6 @@ int		validate_arguments(int ac, char **av);
 int		init_simulation(t_simulation *sim, int ac, char **av);
 void	*philo_routine(void *arg);
 void	check_philo_status(t_simulation *sim);
+void	check_philo_meals(t_simulation *sim);
 
 #endif

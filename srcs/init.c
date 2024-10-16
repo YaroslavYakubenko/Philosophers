@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 21:14:15 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/14 23:09:18 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:50:54 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	init_alive_status(t_simulation *sim)
 	int	i;
 
 	i = 0;
+	sim->is_alive = malloc(sizeof(int) * sim->numbers_of_philosophers);
 	while (i < sim->numbers_of_philosophers)
 	{
 		sim->is_alive[i] = 1;
@@ -57,6 +58,7 @@ int	init_alive_status(t_simulation *sim)
 	}
 	return (1);
 }
+	// printf("here\n");
 
 int	init_simulation(t_simulation *sim, int ac, char **av)
 {
