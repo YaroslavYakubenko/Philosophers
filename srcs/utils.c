@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:50:59 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/14 21:11:51 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/17 19:12:06 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,20 @@ int	ft_atoi(const char *str)
 	return ((np * num));
 }
 
-long	get_current_time(void)
+size_t	get_current_time(void)
 {
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+int	ft_sleep(size_t miliseconds)
+{
+	size_t	start_time;
+
+	start_time = get_current_time();
+	while (get_current_time() - start_time < miliseconds)
+		usleep(500);
+	return (1);
 }

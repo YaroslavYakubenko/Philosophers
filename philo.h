@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/16 21:22:00 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/17 19:12:36 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_simulation
 }	t_simulation;
 
 int		ft_atoi(const char *str);
-long	get_current_time(void);
+size_t	get_current_time(void);
 int		validate_arguments(int ac, char **av);
 int		init_simulation(t_simulation *sim, int ac, char **av);
 void	*philo_routine(void *arg);
