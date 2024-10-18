@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yaroslav <yaroslav@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/17 19:12:36 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/18 15:53:55 by yaroslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_philo
 {
 	int					id; // номер философа
 	int					meals_eaten; // количество приемов пищи
-	int					meals_required; // cчётчик приёмов пищи
+	// int					meals_required; // cчётчик приёмов пищи
 	long				last_meal_time; // время последнего приема пищи
 	pthread_mutex_t		*left_fork; // указатель на левую вилку
 	pthread_mutex_t		*right_fork; // указатель на правую вилку
@@ -40,6 +40,7 @@ typedef struct s_simulation
 	int				time_to_sleep; // время на сон
 	int				number_of_times_each_philosopher_must_eat;
 	int				*is_alive; // массив флагов жизни философов
+	int				sim_terminated; // флаг для завершения симуляции
 	long			start_time; // время начала симуляции
 	t_philo			*philos; // массив философов
 	pthread_mutex_t	*forks; // массив вилок

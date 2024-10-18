@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yaroslav <yaroslav@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:28:32 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/16 21:27:55 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/18 15:51:30 by yaroslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ int	validate_arguments(int ac, char **av)
 void	check_philo_status(t_simulation *sim)
 {
 	int		i;
-	int		all_done;
+	// int		all_done;
 	long	current_time;
 
-	while (1)
+	while (!sim->sim_terminated)
 	{
-		all_done = 1;
+		// all_done = 1;
 		current_time = get_current_time();
 		i = 0;
 		while (i < sim->numbers_of_philosophers)
@@ -71,11 +71,12 @@ void	check_philo_status(t_simulation *sim)
 				sim->is_alive[i] = 0;
 				printf("%ld %d has died\n", current_time - sim->start_time,
 					sim->philos[i].id);
+				sim->sim_terminated = 1;
 				pthread_mutex_unlock(&sim->philos[i].print_mutex);
 				return ;
 			}
-			if (sim->philos[i].meals_eaten < sim->philos[i].meals_required)
-				all_done = 0;
+			// if (sim->philos[i].meals_eaten < sim->philos[i].meals_required)
+				// all_done = 0;
 			pthread_mutex_unlock(&sim->philos[i].print_mutex);
 			i++;
 		}
@@ -94,8 +95,8 @@ void	check_philo_meals(t_simulation *sim)
 		i = 0;
 		while (i < sim->numbers_of_philosophers)
 		{
-			if (sim->philos[i].meals_required != -1
-				&& sim->philos[i].meals_eaten < sim->philos[i].meals_required)
+			if (sim[i].number_of_times_each_philosopher_must_eat != -1
+				&& sim->philos[i].meals_eaten < sim[i].number_of_times_each_philosopher_must_eat)
 			{
 				all_fed = 0;
 				break ;
@@ -104,7 +105,9 @@ void	check_philo_meals(t_simulation *sim)
 		}
 		if (all_fed)
 		{
+			pthread_mutex_lock(&sim->philos[0].print_mutex);
 			printf("All philosophers have eaten the required number of meals.\n");
+			pthread_mutex_unlock(&sim->philos[0].print_mutex);
 			break ;
 		}
 		usleep(1000);
