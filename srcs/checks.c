@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaroslav <yaroslav@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:28:32 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/18 15:51:30 by yaroslav         ###   ########.fr       */
+/*   Updated: 2024/10/18 22:15:42 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,10 @@ int	validate_arguments(int ac, char **av)
 void	check_philo_status(t_simulation *sim)
 {
 	int		i;
-	// int		all_done;
 	long	current_time;
 
 	while (!sim->sim_terminated)
 	{
-		// all_done = 1;
 		current_time = get_current_time();
 		i = 0;
 		while (i < sim->numbers_of_philosophers)
@@ -75,8 +73,6 @@ void	check_philo_status(t_simulation *sim)
 				pthread_mutex_unlock(&sim->philos[i].print_mutex);
 				return ;
 			}
-			// if (sim->philos[i].meals_eaten < sim->philos[i].meals_required)
-				// all_done = 0;
 			pthread_mutex_unlock(&sim->philos[i].print_mutex);
 			i++;
 		}
@@ -95,19 +91,21 @@ void	check_philo_meals(t_simulation *sim)
 		i = 0;
 		while (i < sim->numbers_of_philosophers)
 		{
-			if (sim[i].number_of_times_each_philosopher_must_eat != -1
-				&& sim->philos[i].meals_eaten < sim[i].number_of_times_each_philosopher_must_eat)
+			if (sim->philos[i].meals_required != -1
+				&& sim->philos[i].meals_eaten < sim->philos[i].meals_required)
 			{
 				all_fed = 0;
 				break ;
 			}
 			i++;
 		}
+		// printf("here\n");
 		if (all_fed)
 		{
 			pthread_mutex_lock(&sim->philos[0].print_mutex);
 			printf("All philosophers have eaten the required number of meals.\n");
 			pthread_mutex_unlock(&sim->philos[0].print_mutex);
+			sim->sim_terminated = 1;
 			break ;
 		}
 		usleep(1000);

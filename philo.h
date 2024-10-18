@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaroslav <yaroslav@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/18 15:53:55 by yaroslav         ###   ########.fr       */
+/*   Updated: 2024/10/18 19:52:55 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_philo
 {
 	int					id; // номер философа
 	int					meals_eaten; // количество приемов пищи
-	// int					meals_required; // cчётчик приёмов пищи
+	int					meals_required; // количество приемов пищи
 	long				last_meal_time; // время последнего приема пищи
 	pthread_mutex_t		*left_fork; // указатель на левую вилку
 	pthread_mutex_t		*right_fork; // указатель на правую вилку
@@ -44,7 +44,6 @@ typedef struct s_simulation
 	long			start_time; // время начала симуляции
 	t_philo			*philos; // массив философов
 	pthread_mutex_t	*forks; // массив вилок
-	// pthread_mutex_t	*print_mutex; // мьютекс для печати
 }	t_simulation;
 
 int		ft_atoi(const char *str);

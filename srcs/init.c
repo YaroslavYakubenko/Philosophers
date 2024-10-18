@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 21:14:15 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/16 19:50:54 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/18 22:28:54 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ int	init_philosophers(t_simulation *sim)
 	{
 		sim->philos[i].id = i + 1;
 		sim->philos[i].meals_eaten = 0;
+		if (sim->number_of_times_each_philosopher_must_eat != -1)
+			sim->philos[i].meals_required = -1;
+		else
+			sim->philos[i].meals_required
+				= sim->number_of_times_each_philosopher_must_eat;
 		sim->philos[i].last_meal_time = 0;
 		sim->philos[i].left_fork = &sim->forks[i];
 		sim->philos[i].right_fork = &sim->forks[(i + 1)
