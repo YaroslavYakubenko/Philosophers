@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:28:32 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/18 22:15:42 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/20 20:39:45 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,30 @@ void	check_philo_meals(t_simulation *sim)
 		}
 		usleep(1000);
 	}
+}
+
+int	philo_is_dead(t_philo *philo)
+{
+	long	current_time;
+	long	time_since_last_meal;
+
+	current_time = get_current_time();
+	time_since_last_meal = current_time - philo->last_meal_time;
+	if (time_since_last_meal >= philo->sim->time_to_die)
+	{
+		pthread_mutex_lock(&philo->print_mutex);
+		printf("%ld %d has died\n", current_time - philo->sim->start_time, philo->id);
+		pthread_mutex_unlock(&philo->print_mutex);
+		return (1);
+	}
+	return (0);
+}
+
+int	check_simulation_end(t_philo *philo)
+{
+	if (philo_is_dead(philo))
+		return (1);
+	if (philo->meals_eaten >= philo->meals_required)
+		return (1);
+	return (0);
 }

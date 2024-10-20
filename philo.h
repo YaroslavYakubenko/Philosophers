@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/18 19:52:55 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/20 20:41:45 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int		init_simulation(t_simulation *sim, int ac, char **av);
 void	*philo_routine(void *arg);
 void	check_philo_status(t_simulation *sim);
 void	check_philo_meals(t_simulation *sim);
+int		check_simulation_end(t_philo *philo);
 
 #endif
