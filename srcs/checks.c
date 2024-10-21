@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yaroslav <yaroslav@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:28:32 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/20 20:39:45 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/21 15:49:02 by yaroslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	check_philo_status(t_simulation *sim)
 	{
 		current_time = get_current_time();
 		i = 0;
+		printf("current_time: %ld\nstart_tome: %ld", current_time, sim->start_time);
 		while (i < sim->numbers_of_philosophers)
 		{			
 			pthread_mutex_lock(&sim->philos[i].print_mutex);

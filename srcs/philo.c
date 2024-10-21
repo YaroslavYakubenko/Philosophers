@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yaroslav <yaroslav@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:33:29 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/20 20:46:17 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:28:43 by yaroslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ void	*philo_routine(void *arg)
 	// while (!philo->sim->sim_terminated && !philo->meals_eaten)
 	while (1)
 	{
-		if (check_simulation_end(philo))
-			break ;
-		// printf("here\n");
+		printf("here\n");
+		// if (check_simulation_end(philo))
+		// 	break ;
 		think(philo);
 		if (!take_forks(philo))
 			continue ;
