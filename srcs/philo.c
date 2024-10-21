@@ -3,27 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaroslav <yaroslav@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:33:29 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/21 16:28:43 by yaroslav         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:59:35 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+// int	take_forks(t_philo *philo)
+// {
+// 	pthread_mutex_lock(philo->left_fork);
+// 	pthread_mutex_lock(&philo->print_mutex);
+// 	printf("%ld %d has taken a left fork\n", get_current_time()
+// 		- philo->sim->start_time, philo->id);
+// 	pthread_mutex_unlock(&philo->print_mutex);
+// 	pthread_mutex_lock(philo->right_fork);
+// 	pthread_mutex_lock(&philo->print_mutex);
+// 	printf("%ld %d has taken a right fork\n", get_current_time()
+// 		- philo->sim->start_time, philo->id);
+// 	pthread_mutex_unlock(&philo->print_mutex);
+// 	return (1);
+// }
+
 int	take_forks(t_philo *philo)
 {
-	pthread_mutex_lock(philo->left_fork);
+	while (1)
+	{
+		pthread_mutex_lock(philo->left_fork);
+		if (pthread_mutex_lock(philo->right_fork) == 0)
+			break ;
+		pthread_mutex_unlock(philo->left_fork);
+		usleep(100);
+	}
 	pthread_mutex_lock(&philo->print_mutex);
 	printf("%ld %d has taken a left fork\n", get_current_time()
 		- philo->sim->start_time, philo->id);
-	pthread_mutex_unlock(&philo->print_mutex);
-	pthread_mutex_lock(philo->right_fork);
-	pthread_mutex_lock(&philo->print_mutex);
 	printf("%ld %d has taken a right fork\n", get_current_time()
 		- philo->sim->start_time, philo->id);
 	pthread_mutex_unlock(&philo->print_mutex);
+	// pthread_mutex_unlock(philo->left_fork);
+	// pthread_mutex_unlock(philo->right_fork);
 	return (1);
 }
 
@@ -69,12 +90,8 @@ void	*philo_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	// while (!philo->sim->sim_terminated && !philo->meals_eaten)
 	while (1)
 	{
-		printf("here\n");
-		// if (check_simulation_end(philo))
-		// 	break ;
 		think(philo);
 		if (!take_forks(philo))
 			continue ;

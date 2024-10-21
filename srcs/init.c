@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaroslav <yaroslav@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 21:14:15 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/21 16:12:14 by yaroslav         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:12:17 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	init_alive_status(t_simulation *sim)
 	}
 	return (1);
 }
-	// printf("here\n");
 
 int	init_simulation(t_simulation *sim, int ac, char **av)
 {

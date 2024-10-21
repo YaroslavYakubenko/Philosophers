@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaroslav <yaroslav@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 22:22:26 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/21 16:22:33 by yaroslav         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:12:41 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	main(int ac, char **av)
 	}
 	check_philo_status(&sim);
 	check_philo_meals(&sim);
-	// printf("here_is\n");
 	i = 0;
 	while (i < sim.numbers_of_philosophers)
 	{
