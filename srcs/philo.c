@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaroslav <yaroslav@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:33:29 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/22 17:15:17 by yaroslav         ###   ########.fr       */
+/*   Updated: 2024/10/22 22:52:00 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,26 +74,68 @@ void	sleep_philo(t_philo *philo)
 	usleep(philo->sim->time_to_sleep * 1000);
 }
 
-void	think(t_philo *philo)
+int	think(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->print_mutex);
 	printf("%ld %d is thinking\n", get_current_time()
 		- philo->sim->start_time, philo->id);
 	pthread_mutex_unlock(&philo->print_mutex);
+	return (1);
 }
 
-void	*philo_routine(void *arg)
+// void	*philo_routine(void *arg)
+// {
+// 	t_philo	*philo;
+
+// 	philo = (t_philo *)arg;
+// 	while (1)
+// 	{
+// 		think(philo);
+// 		if (!take_forks(philo))
+// 			continue ;
+// 		eat(philo);
+// 		sleep_philo(philo);
+// 	}
+// 	return (NULL);
+// }
+
+void	put_forks(t_philo *philo)
+{
+	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
+}
+
+int	philo_routine(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->id % 2 == 0)
+		usleep(philo->sim->time_to_eat * 1000);
 	while (1)
 	{
-		think(philo);
-		if (!take_forks(philo))
-			continue ;
-		eat(philo);
-		sleep_philo(philo);
+		if (philo->id % 2 == 1)
+		{
+			if (take_forks(philo))
+			{
+				eat(philo);
+				put_forks(philo);
+				sleep_philo(philo);
+				usleep(100);
+			}
+			think(philo);
+		}
+		else
+		{
+			think(philo);
+			if (take_forks(philo))
+			{
+				eat(philo);
+				put_forks(philo);
+				sleep_philo(philo);
+				usleep(100);
+			}
+		}
 	}
-	return (NULL);
+	return (1);
 }

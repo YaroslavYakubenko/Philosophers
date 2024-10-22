@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/21 19:11:57 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/22 21:04:13 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		ft_atoi(const char *str);
 size_t	get_current_time(void);
 int		validate_arguments(int ac, char **av);
 int		init_simulation(t_simulation *sim, int ac, char **av);
-void	*philo_routine(void *arg);
+int		philo_routine(void *arg);
 void	check_philo_status(t_simulation *sim);
 void	check_philo_meals(t_simulation *sim);
 
