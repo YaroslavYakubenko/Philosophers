@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:28:32 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/21 19:11:52 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:58:03 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,25 @@ void	check_philo_meals(t_simulation *sim)
 		}
 		usleep(1000);
 	}
+}
+
+int	if_one_philo(t_philo *philo)
+{
+	long	current_time;
+	
+	current_time = get_current_time();
+	if (philo->sim->numbers_of_philosophers == 1)
+	{
+		pthread_mutex_lock(philo->left_fork);
+		pthread_mutex_lock(&philo->print_mutex);
+		printf("%ld %d has taken a left fork\n", get_current_time()
+			- philo->sim->start_time, philo->id);
+		pthread_mutex_unlock(&philo->print_mutex);
+		ft_sleep(philo->sim->time_to_die);
+		printf("%ld %d has died\n", current_time - philo->sim->start_time,
+			philo->sim->philos[1].id);
+		pthread_mutex_unlock(philo->left_fork);
+		return (1);
+	}
+	return (0);
 }
