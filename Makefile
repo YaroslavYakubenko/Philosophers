@@ -15,11 +15,8 @@ SRCS				= ${SRCS_DIR}main.c \
 					  ${SRCS_DIR}init.c \
 					  ${SRCS_DIR}philo.c \
 					  ${SRCS_DIR}philo_routine.c \
-					#   ${SRCS_DIR}time.c \
-					#   ${SRCS_DIR}print.c \
-					#   ${SRCS_DIR}check.c
+					  ${SRCS_DIR}print.c \
 
-# OBJS				= $(SRCS:.c=.o)
 OBJS				= $(patsubst $(SRCS_DIR)%.c,$(OBJS_DIR)%.o,$(SRCS))
 
 CFLAGS				= -Wall -Wextra -Werror -pthread -I. #-fsanitize=thread

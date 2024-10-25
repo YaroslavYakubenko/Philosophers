@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:50:59 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/17 19:12:06 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:12:09 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,39 @@ int	ft_atoi(const char *str)
 	return ((np * num));
 }
 
-size_t	get_current_time(void)
+int	ft_strcmp(const char *str1, const char *str2)
 {
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+	while (*str1 && (*str1 == *str2))
+	{
+		str1++;
+		str2++;
+	}
+	return (*(unsigned char *)str1 - *(unsigned char *)str2);
 }
 
-int	ft_sleep(size_t miliseconds)
+long	get_current_time(struct timeval time)
 {
-	size_t	start_time;
+	struct timeval	now;
 
-	start_time = get_current_time();
-	while (get_current_time() - start_time < miliseconds)
-		usleep(500);
-	return (1);
+	gettimeofday(&time, NULL);
+	return (((now.tv_sec * 1000) + (now.tv_usec / 1000))
+		- ((time.tv_sec * 1000) + (time.tv_usec / 1000)));
+}
+
+void	ft_sleep(int time)
+{
+	struct timeval	start_time;
+	struct timeval	now;
+	int				diff;
+
+	gettimeofday(&start_time, NULL);
+	while (1)
+	{
+		gettimeofday(&now, NULL);
+		diff = ((now.tv_sec * 1000) + (now.tv_usec / 1000))
+			- ((start_time.tv_sec * 1000) + (start_time.tv_usec / 1000));
+		if (diff >= time)
+			break ;
+		usleep(100);
+	}
 }

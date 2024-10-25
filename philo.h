@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/24 19:10:11 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:12:29 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,29 @@ typedef struct s_simulation
 	int				time_to_sleep; // время на сон
 	int				number_of_times_each_philosopher_must_eat;
 	int				*is_alive; // массив флагов жизни философов
+	int				is_die; // флаг для смерти
 	int				sim_terminated; // флаг для завершения симуляции
 	long			start_time; // время начала симуляции
 	t_philo			*philos; // массив философов
+	struct timeval	time; // структура времени
 	pthread_mutex_t	*forks; // массив вилок
 }	t_simulation;
 
 int		ft_atoi(const char *str);
-size_t	get_current_time(void);
+int		ft_strcmp(const char *str1, const char *str2);
+long	get_current_time(struct timeval time);
 int		validate_arguments(int ac, char **av);
 int		init_simulation(t_simulation *sim, int ac, char **av);
 int		take_forks(t_philo *philo);
-void	eat(t_philo *philo);
+int		eat(t_philo *philo);
 void	sleep_philo(t_philo *philo);
 int		think(t_philo *philo);
 void	put_forks(t_philo *philo);
 void	*philo_routine(void *arg);
 void	check_philo_status(t_simulation *sim);
 void	check_philo_meals(t_simulation *sim);
+void	ft_sleep(int time);
+int		if_one_philo(t_philo *philo);
+void	print_msg(t_philo *philo, char *msg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:33:29 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/24 20:05:51 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:16:11 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	*philo_routine(void *arg)
 		{
 			if (take_forks(philo))
 			{
+				// printf("here\n");
 				eat(philo);
 				sleep_philo(philo);
 				usleep(100);

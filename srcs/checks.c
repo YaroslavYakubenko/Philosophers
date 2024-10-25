@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:28:32 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/24 22:58:03 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/25 23:00:32 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,16 @@ void	check_philo_status(t_simulation *sim)
 
 	while (!sim->sim_terminated)
 	{
-		current_time = get_current_time();
+		current_time = get_current_time(sim->time);
 		i = 0;
-		printf("current_time: %ld\nstart_tome: %ld", current_time, sim->start_time);
+		// printf("current_time: %ld\nstart_tome: %ld", current_time, sim->start_time);
 		while (i < sim->numbers_of_philosophers)
 		{			
 			pthread_mutex_lock(&sim->philos[i].print_mutex);
 			if (current_time - sim->philos[i].last_meal_time > sim->time_to_die)
 			{
 				sim->is_alive[i] = 0;
-				printf("%ld %d has died\n", current_time - sim->start_time,
+				printf("%ld %d has died again\n", current_time - sim->start_time,
 					sim->philos[i].id);
 				sim->sim_terminated = 1;
 				pthread_mutex_unlock(&sim->philos[i].print_mutex);
@@ -102,9 +102,9 @@ void	check_philo_meals(t_simulation *sim)
 		}
 		if (all_fed == 0)
 		{
-			pthread_mutex_lock(&sim->philos[0].print_mutex);
-			printf("All philosophers have eaten the required number of meals.\n");
-			pthread_mutex_unlock(&sim->philos[0].print_mutex);
+			// pthread_mutex_lock(&sim->philos[0].print_mutex);
+			// printf("All philosophers have eaten the required number of meals.\n");
+			// pthread_mutex_unlock(&sim->philos[0].print_mutex);
 			sim->sim_terminated = 1;
 			break ;
 		}
@@ -114,19 +114,12 @@ void	check_philo_meals(t_simulation *sim)
 
 int	if_one_philo(t_philo *philo)
 {
-	long	current_time;
-	
-	current_time = get_current_time();
 	if (philo->sim->numbers_of_philosophers == 1)
 	{
 		pthread_mutex_lock(philo->left_fork);
-		pthread_mutex_lock(&philo->print_mutex);
-		printf("%ld %d has taken a left fork\n", get_current_time()
-			- philo->sim->start_time, philo->id);
-		pthread_mutex_unlock(&philo->print_mutex);
+		print_msg(philo, "fork_left");
 		ft_sleep(philo->sim->time_to_die);
-		printf("%ld %d has died\n", current_time - philo->sim->start_time,
-			philo->sim->philos[1].id);
+		print_msg(philo, "died");
 		pthread_mutex_unlock(philo->left_fork);
 		return (1);
 	}
