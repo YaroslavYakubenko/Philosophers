@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/25 23:12:29 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/26 21:24:05 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,11 @@ void	sleep_philo(t_philo *philo);
 int		think(t_philo *philo);
 void	put_forks(t_philo *philo);
 void	*philo_routine(void *arg);
-void	check_philo_status(t_simulation *sim);
+int		check_philo_status(t_philo *philo, long time);
 void	check_philo_meals(t_simulation *sim);
-void	ft_sleep(int time);
+void	ft_usleep(int time);
 int		if_one_philo(t_philo *philo);
 void	print_msg(t_philo *philo, char *msg);
+void	take_forks_in_the_line(t_philo *philo);
 
 #endif

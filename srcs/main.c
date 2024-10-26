@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 22:22:26 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/21 19:12:41 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/26 21:18:43 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 			(void *)&sim.philos[i]);
 		i++;
 	}
-	check_philo_status(&sim);
+	// check_philo_status(&sim);
 	check_philo_meals(&sim);
 	i = 0;
 	while (i < sim.numbers_of_philosophers)

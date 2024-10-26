@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:50:59 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/25 23:12:09 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/26 20:29:13 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,26 @@ int	ft_strcmp(const char *str1, const char *str2)
 long	get_current_time(struct timeval time)
 {
 	struct timeval	now;
+	int				diff;
 
-	gettimeofday(&time, NULL);
-	return (((now.tv_sec * 1000) + (now.tv_usec / 1000))
-		- ((time.tv_sec * 1000) + (time.tv_usec / 1000)));
+	gettimeofday(&now, NULL);
+	diff = (now.tv_sec * 1000 + now.tv_usec / 1000) - (time.tv_sec * 1000
+			+ time.tv_usec / 1000);
+	return (diff);
 }
 
-void	ft_sleep(int time)
+void	ft_usleep(int time)
 {
-	struct timeval	start_time;
+	struct timeval	start;
 	struct timeval	now;
 	int				diff;
 
-	gettimeofday(&start_time, NULL);
+	gettimeofday(&start, NULL);
 	while (1)
 	{
 		gettimeofday(&now, NULL);
-		diff = ((now.tv_sec * 1000) + (now.tv_usec / 1000))
-			- ((start_time.tv_sec * 1000) + (start_time.tv_usec / 1000));
+		diff = (now.tv_sec * 1000 + now.tv_usec / 1000) - (start.tv_sec * 1000
+				+ start.tv_usec / 1000);
 		if (diff >= time)
 			break ;
 		usleep(100);

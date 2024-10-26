@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 21:14:15 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/25 23:01:18 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/26 19:50:22 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ int	init_simulation(t_simulation *sim, int ac, char **av)
 		return (0);
 	init_forks(sim);
 	init_philosophers(sim);
-	sim->start_time = get_current_time(sim->time);
+	// sim->start_time = get_current_time(sim->time);
+	gettimeofday(&sim->time, NULL);
 	if (!init_alive_status(sim))
 		return (0);
 	return (1);

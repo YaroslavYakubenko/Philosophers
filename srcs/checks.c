@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:28:32 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/25 23:00:32 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/26 21:24:02 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,33 +52,14 @@ int	validate_arguments(int ac, char **av)
 	return (1);
 }
 
-void	check_philo_status(t_simulation *sim)
+int	check_philo_status(t_philo *philo, long time)
 {
-	int		i;
-	long	current_time;
-
-	while (!sim->sim_terminated)
+	if (time >= philo->sim->time_to_die || philo->sim->is_die == 1)
 	{
-		current_time = get_current_time(sim->time);
-		i = 0;
-		// printf("current_time: %ld\nstart_tome: %ld", current_time, sim->start_time);
-		while (i < sim->numbers_of_philosophers)
-		{			
-			pthread_mutex_lock(&sim->philos[i].print_mutex);
-			if (current_time - sim->philos[i].last_meal_time > sim->time_to_die)
-			{
-				sim->is_alive[i] = 0;
-				printf("%ld %d has died again\n", current_time - sim->start_time,
-					sim->philos[i].id);
-				sim->sim_terminated = 1;
-				pthread_mutex_unlock(&sim->philos[i].print_mutex);
-				return ;
-			}
-			pthread_mutex_unlock(&sim->philos[i].print_mutex);
-			i++;
-		}
-		usleep(1000);
+		print_msg(philo, "died");
+		return (1);
 	}
+	return (0);
 }
 
 void	check_philo_meals(t_simulation *sim)
@@ -118,10 +99,28 @@ int	if_one_philo(t_philo *philo)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		print_msg(philo, "fork_left");
-		ft_sleep(philo->sim->time_to_die);
+		ft_usleep(philo->sim->time_to_die);
 		print_msg(philo, "died");
 		pthread_mutex_unlock(philo->left_fork);
 		return (1);
 	}
 	return (0);
+}
+
+void	take_forks_in_the_line(t_philo *philo)
+{
+	if (philo->left_fork < philo->right_fork)
+	{
+		pthread_mutex_lock(philo->left_fork);
+		print_msg(philo, "fork_left");
+		pthread_mutex_lock(philo->right_fork);
+		print_msg(philo, "fork_right");
+	}
+	else
+	{
+		pthread_mutex_lock(philo->right_fork);
+		print_msg(philo, "fork_right");
+		pthread_mutex_lock(philo->left_fork);
+		print_msg(philo, "fork_left");
+	}
 }
