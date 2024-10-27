@@ -6,46 +6,11 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:33:29 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/26 21:16:41 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/27 18:36:09 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// void	*philo_routine(void *arg)
-// {
-// 	t_philo	*philo;
-
-// 	philo = (t_philo *)arg;
-// 	if (philo->id % 2 == 0)
-// 		think(philo);
-// 		// usleep(philo->sim->time_to_eat * 1000);
-// 	while (1)
-// 	{
-// 		if (philo->id % 2 == 1)
-// 		{
-// 			if (take_forks(philo))
-// 			{
-// 				eat(philo);
-// 				sleep_philo(philo);
-// 				ft_usleep(100);
-// 			}
-// 			think(philo);
-// 		}
-// 		else
-// 		{
-// 			think(philo);
-// 			if (take_forks(philo))
-// 			{
-// 				eat(philo);
-// 				sleep_philo(philo);
-// 				ft_usleep(100);
-// 			}
-// 			// printf("here\n");
-// 		}
-// 	}
-// 	return (NULL);
-// }
 
 void	*philo_routine(void *arg)
 {

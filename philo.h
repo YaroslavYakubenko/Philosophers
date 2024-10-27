@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/26 21:24:05 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/27 19:35:46 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 typedef struct s_philo
 {
 	int					id; // номер философа
+	pthread_t			thread; // поток философа
 	int					meals_eaten; // количество приемов пищи
 	int					meals_required; // количество приемов пищи
 	long				last_meal_time; // время последнего приема пищи
@@ -38,8 +39,8 @@ typedef struct s_simulation
 	int				time_to_die; // время до смерти
 	int				time_to_eat; // время на еду
 	int				time_to_sleep; // время на сон
-	int				number_of_times_each_philosopher_must_eat;
-	int				*is_alive; // массив флагов жизни философов
+	int				number_meals; // количество приемов пищи
+	// int				*is_alive; // массив флагов жизни философов
 	int				is_die; // флаг для смерти
 	int				sim_terminated; // флаг для завершения симуляции
 	long			start_time; // время начала симуляции
@@ -53,17 +54,15 @@ int		ft_strcmp(const char *str1, const char *str2);
 long	get_current_time(struct timeval time);
 int		validate_arguments(int ac, char **av);
 int		init_simulation(t_simulation *sim, int ac, char **av);
-int		take_forks(t_philo *philo);
+void	take_forks(t_philo *philo);
 int		eat(t_philo *philo);
 void	sleep_philo(t_philo *philo);
 int		think(t_philo *philo);
 void	put_forks(t_philo *philo);
 void	*philo_routine(void *arg);
 int		check_philo_status(t_philo *philo, long time);
-void	check_philo_meals(t_simulation *sim);
 void	ft_usleep(int time);
 int		if_one_philo(t_philo *philo);
 void	print_msg(t_philo *philo, char *msg);
-void	take_forks_in_the_line(t_philo *philo);
 
 #endif

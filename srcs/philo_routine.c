@@ -6,40 +6,42 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 19:01:46 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/26 21:25:26 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/27 19:18:25 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	take_forks(t_philo *philo)
+void	take_forks(t_philo *philo)
 {
-	while (1)
+	if (philo->left_fork < philo->right_fork)
 	{
 		pthread_mutex_lock(philo->left_fork);
-		if (pthread_mutex_lock(philo->right_fork) == 0)
-			break ;
-		pthread_mutex_unlock(philo->left_fork);
-		ft_usleep(100);
+		print_msg(philo, "fork_left");
+		pthread_mutex_lock(philo->right_fork);
+		print_msg(philo, "fork_right");
 	}
-	print_msg(philo, "fork_left");
-	print_msg(philo, "fork_right");
-	return (1);
+	else
+	{
+		pthread_mutex_lock(philo->right_fork);
+		print_msg(philo, "fork_right");
+		pthread_mutex_lock(philo->left_fork);
+		print_msg(philo, "fork_left");
+	}
 }
 
 int	eat(t_philo *philo)
 {
 	if (if_one_philo(philo))
 		return (1);
-	take_forks_in_the_line(philo);
+	take_forks(philo);
 	print_msg(philo, "eating");
-	philo->last_meal_time = get_current_time(philo->sim->time);
+	ft_usleep(philo->sim->time_to_eat);
 	philo->meals_eaten++;
-	if (philo->sim->number_of_times_each_philosopher_must_eat != -1
+	if (philo->sim->number_meals != -1
 		&& philo->meals_eaten
-		>= philo->sim->number_of_times_each_philosopher_must_eat)
+		>= philo->sim->number_meals)
 		philo->sim->sim_terminated = 1;
-	ft_usleep(philo->sim->time_to_eat * 1000);
 	put_forks(philo);
 	return (0);
 }
@@ -47,13 +49,13 @@ int	eat(t_philo *philo)
 void	sleep_philo(t_philo *philo)
 {
 	print_msg(philo, "sleeping");
-	ft_usleep(philo->sim->time_to_sleep * 1000);
+	ft_usleep(1);
 }
 
 int	think(t_philo *philo)
 {
 	print_msg(philo, "thinking");
-	ft_usleep(philo->sim->time_to_sleep * 1000);
+	ft_usleep(philo->sim->time_to_sleep);
 	return (1);
 }
 
