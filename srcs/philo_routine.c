@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 19:01:46 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/27 19:18:25 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/27 20:39:03 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,14 @@ int	eat(t_philo *philo)
 void	sleep_philo(t_philo *philo)
 {
 	print_msg(philo, "sleeping");
-	ft_usleep(1);
+	ft_usleep(philo->sim->time_to_sleep);
 }
 
 int	think(t_philo *philo)
 {
 	print_msg(philo, "thinking");
-	ft_usleep(philo->sim->time_to_sleep);
+	// ft_usleep(philo->sim->time_to_sleep);
+	ft_usleep(1);
 	return (1);
 }
 
