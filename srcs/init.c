@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 21:14:15 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/27 19:36:05 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/28 22:34:59 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,10 @@ int	init_philosophers(t_simulation *sim)
 	return (1);
 }
 
-// int	init_alive_status(t_simulation *sim)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	sim->is_alive = malloc(sizeof(int) * sim->numbers_of_philosophers);
-// 	while (i < sim->numbers_of_philosophers)
-// 	{
-// 		sim->is_alive[i] = 1;
-// 		i++;
-// 	}
-// 	return (1);
-// }
-
 int	init_simulation(t_simulation *sim, int ac, char **av)
 {
 	sim->is_die = 0;
+	sim->sim_terminated = 0;
 	sim->numbers_of_philosophers = ft_atoi(av[1]);
 	sim->time_to_die = ft_atoi(av[2]);
 	sim->time_to_eat = ft_atoi(av[3]);
@@ -81,7 +68,5 @@ int	init_simulation(t_simulation *sim, int ac, char **av)
 	init_forks(sim);
 	init_philosophers(sim);
 	gettimeofday(&sim->time, NULL);
-	// if (!init_alive_status(sim))
-	// 	return (0);
 	return (1);
 }

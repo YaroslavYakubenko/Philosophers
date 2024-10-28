@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaroslav <yaroslav@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/28 17:05:10 by yaroslav         ###   ########.fr       */
+/*   Updated: 2024/10/28 22:34:52 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_simulation
 	int				time_to_eat; // время на еду
 	int				time_to_sleep; // время на сон
 	int				number_meals; // количество приемов пищи
-	// int				*is_alive; // массив флагов жизни философов
 	int				is_die; // флаг для смерти
 	int				sim_terminated; // флаг для завершения симуляции
 	long			start_time; // время начала симуляции
@@ -64,5 +63,7 @@ int		check_philo_status(t_philo *philo, long time);
 void	ft_usleep(int time);
 int		if_one_philo(t_philo *philo);
 void	print_msg(t_philo *philo, char *msg);
+int		philo_is_finished(t_philo *philo);
+void	philo_eaten(t_philo *philo);
 
 #endif

@@ -3,33 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaroslav <yaroslav@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:33:29 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/28 17:36:40 by yaroslav         ###   ########.fr       */
+/*   Updated: 2024/10/28 22:31:12 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	philo_eaten(t_philo *philo)
+{
+	t_simulation	*sim;
+
+	sim = philo->sim;
+	if (philo->left_fork && philo->right_fork)
+	{
+		philo->meals_eaten++;
+		printf("Philosopher: %d\n", philo->id);
+		printf("Meals_eaten: %d\n", philo->meals_eaten);
+	}
+}
+
 int	philo_is_finished(t_philo *philo)
 {
-	int	i;
-	int	j;
+	t_simulation	*sim;
+	int				i;
+	int				finished_philo;
 
-	j = 0;
+	finished_philo = 0;
 	i = 0;
-	while (1)
+	sim = philo->sim;
+	while (i < sim->numbers_of_philosophers)
 	{
-		if (philo[i].meals_eaten >= philo->sim->numbers_of_philosophers)
-			j++;
-			i++;
-		if (j == philo->sim->numbers_of_philosophers)
-		{
-			philo->sim->sim_terminated = 1;
-			return (1);
-		}
-		continue ;
+		if (sim->philos[i].meals_eaten >= sim->number_meals)
+			finished_philo++;
+		i++;
+	}
+	if (finished_philo == sim->numbers_of_philosophers)
+	{
+		sim->sim_terminated = 1;
+		return (1);
 	}
 	return (0);
 }
@@ -52,8 +66,7 @@ void	*philo_routine(void *arg)
 		time = get_current_time(philo->sim->time) - philo->last_meal_time;
 		if (check_philo_status(philo, time))
 			break ;
-		if (philo_is_finished(philo))
-			break ;
+		printf("philo->sim->sim_terminated: %d\n", philo->sim->sim_terminated);
 		philo->last_meal_time = get_current_time(philo->sim->time);
 		sleep_philo(philo);
 		think(philo);
