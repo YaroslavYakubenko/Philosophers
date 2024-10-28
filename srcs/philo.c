@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yaroslav <yaroslav@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:33:29 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/27 20:53:18 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/28 17:36:40 by yaroslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,23 @@
 
 int	philo_is_finished(t_philo *philo)
 {
-	if (philo->meals_required != -1
-		&& philo->meals_eaten >= philo->meals_required)
-		return (1);
+	int	i;
+	int	j;
+
+	j = 0;
+	i = 0;
+	while (1)
+	{
+		if (philo[i].meals_eaten >= philo->sim->numbers_of_philosophers)
+			j++;
+			i++;
+		if (j == philo->sim->numbers_of_philosophers)
+		{
+			philo->sim->sim_terminated = 1;
+			return (1);
+		}
+		continue ;
+	}
 	return (0);
 }
 
@@ -38,7 +52,7 @@ void	*philo_routine(void *arg)
 		time = get_current_time(philo->sim->time) - philo->last_meal_time;
 		if (check_philo_status(philo, time))
 			break ;
-		if (!philo_is_finished(philo))
+		if (philo_is_finished(philo))
 			break ;
 		philo->last_meal_time = get_current_time(philo->sim->time);
 		sleep_philo(philo);
