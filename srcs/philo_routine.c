@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 19:01:46 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/28 22:30:39 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/28 23:53:59 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	eat(t_philo *philo)
 {
 	if (if_one_philo(philo))
 		return (1);
-	if (philo_is_finished(philo))
+	if (philo_is_finished(philo) && philo->sim->number_meals != -1)
 		return (1);
 	take_forks(philo);
 	print_msg(philo, "eating");

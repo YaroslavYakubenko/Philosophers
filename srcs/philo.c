@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:33:29 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/28 22:31:12 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/28 23:51:27 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	philo_eaten(t_philo *philo)
 	if (philo->left_fork && philo->right_fork)
 	{
 		philo->meals_eaten++;
-		printf("Philosopher: %d\n", philo->id);
-		printf("Meals_eaten: %d\n", philo->meals_eaten);
+		// printf("Philosopher: %d\n", philo->id);
+		// printf("Meals_eaten: %d\n", philo->meals_eaten);
 	}
 }
 
@@ -66,7 +66,7 @@ void	*philo_routine(void *arg)
 		time = get_current_time(philo->sim->time) - philo->last_meal_time;
 		if (check_philo_status(philo, time))
 			break ;
-		printf("philo->sim->sim_terminated: %d\n", philo->sim->sim_terminated);
+		// printf("philo->sim->sim_terminated: %d\n", philo->sim->sim_terminated);
 		philo->last_meal_time = get_current_time(philo->sim->time);
 		sleep_philo(philo);
 		think(philo);
