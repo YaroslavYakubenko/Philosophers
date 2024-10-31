@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:44:44 by yaroslav          #+#    #+#             */
-/*   Updated: 2024/10/28 22:34:52 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/31 19:06:56 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ typedef struct s_philo
 	pthread_t			thread; // поток философа
 	int					meals_eaten; // количество приемов пищи
 	int					meals_required; // количество пищи который должен съесть
+	int					finished_eating; // флаг для завершения приема пищи
 	long				last_meal_time; // время последнего приема пищи
 	pthread_mutex_t		*left_fork; // указатель на левую вилку
 	pthread_mutex_t		*right_fork; // указатель на правую вилку
-	pthread_mutex_t		print_mutex; // мьютекс для печати
 	struct s_simulation	*sim; // указатель на структуру симуляции
 }	t_philo;
 
@@ -45,6 +45,7 @@ typedef struct s_simulation
 	long			start_time; // время начала симуляции
 	t_philo			*philos; // массив философов
 	struct timeval	time; // структура времени
+	pthread_mutex_t	print_mutex; // мьютекс для печати
 	pthread_mutex_t	*forks; // массив вилок
 }	t_simulation;
 

@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 21:14:15 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/28 22:34:59 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:10:17 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ int	init_philosophers(t_simulation *sim)
 		else
 			sim->philos[i].meals_required
 				= sim->number_meals;
+		sim->philos[i].finished_eating = 0;
 		sim->philos[i].last_meal_time = 0;
 		sim->philos[i].left_fork = &sim->forks[i];
 		sim->philos[i].right_fork = &sim->forks[(i + 1)
 			% sim->numbers_of_philosophers];
 		sim->philos[i].sim = sim;
-		pthread_mutex_init(&sim->philos[i].print_mutex, NULL);
+		pthread_mutex_init(&sim->print_mutex, NULL);
 		i++;
 	}
 	return (1);
@@ -54,6 +55,7 @@ int	init_simulation(t_simulation *sim, int ac, char **av)
 {
 	sim->is_die = 0;
 	sim->sim_terminated = 0;
+	// sim->finished_philo = 0;
 	sim->numbers_of_philosophers = ft_atoi(av[1]);
 	sim->time_to_die = ft_atoi(av[2]);
 	sim->time_to_eat = ft_atoi(av[3]);

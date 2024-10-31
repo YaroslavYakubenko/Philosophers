@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:27:28 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/27 19:39:55 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:14:35 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,16 @@ void	print_fork(t_philo *philo, char *msg)
 	else if (ft_strcmp(msg, "fork_right") == 0)
 		printf("%ld %d has taken a right fork\n",
 			get_current_time(philo->sim->time), philo->id);
-	// printf("here\n");
 }
 
 void	print_msg(t_philo *philo, char *msg)
 {
-	pthread_mutex_lock(&philo->print_mutex);
+	pthread_mutex_lock(&philo->sim->print_mutex);
 	if (philo->sim->is_die)
 	{
-		pthread_mutex_unlock(&philo->print_mutex);
+		pthread_mutex_unlock(&philo->sim->print_mutex);
 		return ;
 	}
-	// printf("here\n");
 	print_fork(philo, msg);
 	if (ft_strcmp(msg, "eating") == 0)
 		printf("%ld %d is eating\n", get_current_time(philo->sim->time),
@@ -48,5 +46,5 @@ void	print_msg(t_philo *philo, char *msg)
 			philo->id);
 		philo->sim->is_die = 1;
 	}
-	pthread_mutex_unlock(&philo->print_mutex);
+	pthread_mutex_unlock(&philo->sim->print_mutex);
 }

@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:28:32 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/27 20:25:17 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/31 19:05:39 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ int	validate_arguments(int ac, char **av)
 		printf("Error: wrong number of arguments\n");
 		return (0);
 	}
+	if (ft_atoi(av[1]) < 1 || ft_atoi(av[1]) > 200)
+	{
+		printf("Error: wrong number of philosophers\n");
+		return (0);
+	}
 	while (i < ac)
 	{
 		if (!is_valid_number(av[i]))
@@ -54,9 +59,6 @@ int	validate_arguments(int ac, char **av)
 
 int	check_philo_status(t_philo *philo, long time)
 {
-	// printf("time: %ld\n", time);
-	// printf("time_to_die: %d\n", philo->sim->time_to_die);
-	// printf("is_die: %d\n", philo->sim->is_die);
 	if (time >= philo->sim->time_to_die || philo->sim->is_die == 1)
 	{
 		print_msg(philo, "died");
