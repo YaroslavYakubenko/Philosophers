@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:33:29 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/31 17:26:39 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/31 19:32:12 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,6 @@ void	philo_eaten(t_philo *philo)
 	}
 	pthread_mutex_unlock(&philo->sim->print_mutex);
 }
-
-// int	philo_is_finished(t_philo *philo)
-// {
-// 	t_simulation	*sim;
-// 	int				i;
-
-// 	i = 0;
-// 	sim = philo->sim;
-// 	pthread_mutex_lock(&sim->print_mutex);
-// 	while (i < sim->numbers_of_philosophers)
-// 	{
-// 		if (sim->philos[i].meals_eaten >= sim->number_meals)
-// 			sim->finished_philo++;
-// 		// printf("number_meals: %d\n", sim->number_meals);
-// 		// printf("sim->philo[%d].meals_eaten: %d\n", i, sim->philos[i].meals_eaten);
-// 		i++;
-// 	}
-// 	if (sim->finished_philo == sim->numbers_of_philosophers)
-// 	{
-// 		sim->sim_terminated = 1;
-// 		pthread_mutex_unlock(&sim->print_mutex);
-// 		return (1);
-// 	}
-// 	pthread_mutex_unlock(&sim->print_mutex);
-// 	return (0);
-// }
 
 int	philo_is_finished(t_philo *philo)
 {

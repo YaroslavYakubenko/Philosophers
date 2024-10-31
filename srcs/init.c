@@ -6,7 +6,7 @@
 /*   By: yyakuben <yyakuben@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 21:14:15 by yyakuben          #+#    #+#             */
-/*   Updated: 2024/10/31 17:10:17 by yyakuben         ###   ########.fr       */
+/*   Updated: 2024/10/31 19:32:37 by yyakuben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	init_simulation(t_simulation *sim, int ac, char **av)
 {
 	sim->is_die = 0;
 	sim->sim_terminated = 0;
-	// sim->finished_philo = 0;
 	sim->numbers_of_philosophers = ft_atoi(av[1]);
 	sim->time_to_die = ft_atoi(av[2]);
 	sim->time_to_eat = ft_atoi(av[3]);
