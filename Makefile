@@ -19,7 +19,7 @@ SRCS				= ${SRCS_DIR}main.c \
 
 OBJS				= $(patsubst $(SRCS_DIR)%.c,$(OBJS_DIR)%.o,$(SRCS))
 
-CFLAGS				= -Wall -Wextra -Werror -pthread -I. #-fsanitize=thread
+CFLAGS				= -Wall -Wextra -Werror -pthread -I. 
 CC					= cc
 
 RM					= rm -rf
